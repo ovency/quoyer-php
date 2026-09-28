@@ -1,0 +1,74 @@
+{
+    "name": "quoyer/quoyer-php",
+    "description": "Official PHP SDK for the Quoyer loyalty API: customers, points, redemptions, webhooks, with Laravel integration.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["quoyer", "loyalty", "points", "rewards", "sdk", "api", "laravel", "webhooks"],
+    "homepage": "https://github.com/ovency/quoyer-php",
+    "support": {
+        "docs": "https://quoyer.com/api/docs",
+        "email": "support@quoyer.com",
+        "issues": "https://github.com/ovency/quoyer-php/issues",
+        "source": "https://github.com/ovency/quoyer-php"
+    },
+    "authors": [
+        {
+            "name": "Quoyer",
+            "email": "support@quoyer.com",
+            "homepage": "https://quoyer.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^9.0 || ^10.0 || ^11.0",
+        "pestphp/pest": "^3.0 || ^4.0",
+        "phpstan/phpstan": "^2.0",
+        "symfony/yaml": "^7.0 || ^8.0"
+    },
+    "suggest": {
+        "illuminate/support": "For the Laravel service provider, the Quoyer facade and the webhook middleware (auto-discovered)."
+    },
+    "autoload": {
+        "psr-4": {
+            "Quoyer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Quoyer\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Quoyer\\Laravel\\QuoyerServiceProvider"
+            ],
+            "aliases": {
+                "Quoyer": "Quoyer\\Laravel\\Facades\\Quoyer"
+            }
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "check": [
+            "pint --test",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -1,0 +1,9 @@
+parameters:
+    level: 8
+    paths:
+        - src
+    treatPhpDocTypesAsCertain: false
+    # Quoyer objects read any field through __get: the API adds fields
+    # without a version bump, and the SDK must never hide one.
+    universalObjectCratesClasses:
+        - Quoyer\QuoyerObject
