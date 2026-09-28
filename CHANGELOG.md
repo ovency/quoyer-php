@@ -4,6 +4,15 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-09-28
+
+### Changed
+
+- Allow Guzzle 8 (`^7.8 || ^8.0`). Laravel 13 and the AWS SDK resolve to
+  `guzzlehttp/guzzle` 8, so the `^7.8` pin made the SDK uninstallable beside
+  them. The client only uses `ClientInterface`, `RequestOptions` and
+  `GuzzleException`, unchanged in 8.x; the suite passes on 7.x and 8.x.
+
 ## [1.0.0] - 2026-09-28
 
 Covers Quoyer API contract **v1.9** in full.
