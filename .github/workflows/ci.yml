@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   tests:
-    name: PHP ${{ matrix.php }}${{ matrix.lowest && ' (lowest deps)' || '' }}
+    name: PHP ${{ matrix.php }}${{ matrix.guzzle && format(' (lowest Guzzle {0})', matrix.guzzle-floor) || matrix.lowest && ' (lowest deps)' || '' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -18,8 +18,21 @@ jobs:
         php: ['8.2', '8.3', '8.4']
         lowest: [false]
         include:
+          # The lowest PHP with the lowest dependencies.
           - php: '8.2'
             lowest: true
+          # The lowest version of each Guzzle major composer.json allows: the
+          # oldest without a security advisory (Composer 2.10+ refuses those).
+          # Keep guzzle-floor equal to the minimum in composer.json: the job
+          # fails if a different version gets installed.
+          - php: '8.4'
+            lowest: true
+            guzzle: '^7.15.2'
+            guzzle-floor: '7.15.2'
+          - php: '8.4'
+            lowest: true
+            guzzle: '^8.0.1'
+            guzzle-floor: '8.0.1'
 
     steps:
       - uses: actions/checkout@v5
@@ -29,8 +42,24 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
+      - name: Pin the Guzzle major under test
+        if: ${{ matrix.guzzle }}
+        run: composer require --no-interaction --no-update "guzzlehttp/guzzle:${{ matrix.guzzle }}"
+
       - name: Install dependencies
         run: composer update --no-interaction --no-progress ${{ matrix.lowest && '--prefer-lowest' || '' }}
+
+      - name: Show the Guzzle under test
+        run: composer show guzzlehttp/guzzle | grep -E '^versions'
+
+      - name: Check it is the declared minimum
+        if: ${{ matrix.guzzle }}
+        run: |
+          installed="$(composer show guzzlehttp/guzzle --format=json | php -r 'echo json_decode(stream_get_contents(STDIN), true)["versions"][0];')"
+          if [ "$installed" != "${{ matrix.guzzle-floor }}" ]; then
+            echo "::error::Expected Guzzle ${{ matrix.guzzle-floor }} (the minimum in composer.json), got $installed."
+            exit 1
+          fi
 
       - name: Fetch the API contract for the drift check
         if: ${{ vars.QUOYER_OPENAPI_URL != '' }}

@@ -61,7 +61,7 @@ echo $result->pointsAwarded(); // 49
 ## Requirements
 
 - PHP 8.2 or newer, with `ext-json`
-- Guzzle 7 (installed with the SDK; Laravel already ships it)
+- Guzzle 7.15.2+ or 8.0.1+ (installed with the SDK; Laravel already ships it)
 - A Quoyer API key: the merchant creates one in the dashboard under
   **Integration → API keys**. It is shown once.
 

@@ -4,6 +4,17 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.0.2] - 2026-09-28
+
+### Security
+
+- Require a Guzzle without published advisories: `^7.15.2 || ^8.0.1` (was
+  `^7.8 || ^8.0`). Older releases carry CVE-2026-59883, CVE-2026-67353/54/55
+  and CVE-2026-69245/46 (cookie disclosure and scope, host checks, Referer
+  leaks). Composer 2.10+ already refuses them; this makes the SDK refuse them
+  on every Composer. CI now installs exactly these minimums and fails if the
+  resolved version drifts.
+
 ## [1.0.1] - 2026-09-28
 
 ### Changed

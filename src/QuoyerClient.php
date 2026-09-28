@@ -41,7 +41,7 @@ use Quoyer\Services\TierService;
 final class QuoyerClient
 {
     /** This SDK's version. */
-    public const VERSION = '1.0.1';
+    public const VERSION = '1.0.2';
 
     /** The API contract version this SDK release covers in full. */
     public const API_CONTRACT = '1.9';
