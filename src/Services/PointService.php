@@ -52,7 +52,7 @@ final class PointService extends AbstractService
      * and `points_reversed` is 0. Nothing credited for this reference throws
      * NotFoundException `bucket_not_found`, which you can treat as done.
      *
-     * @param  array{source_reference: string, customer_id?: string|null, customer_external_id?: string|null, customer_external_source?: string|null, rule_type?: RuleType|string|null, reason?: string|null, triggered_by?: array<string, mixed>|null}  $params
+     * @param  array{source_reference: string, customer_id?: string|null, customer_external_id?: string|null, customer_external_source?: string|null, rule_type?: RuleType|string|null, amount?: float|int|null, points?: int|null, refund_reference?: string|null, reason?: string|null, triggered_by?: array<string, mixed>|null}  $params
      */
     public function reverseCredit(array $params): PointCreditReversalResult
     {

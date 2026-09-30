@@ -57,6 +57,8 @@ New codes can appear: always keep a default branch.
 | `insufficient_points` | 422 | InvalidRequest | Not enough spendable points. | Offer fewer points. |
 | `invalid_redeem_request` | 422 | InvalidRequest | Outside the programme's min/max, or not positive. | Read the limits from `program->retrieve()`. |
 | `invalid_reverse_request` | 422 | InvalidRequest | The redemption can't be reversed. | Don't retry. |
+| `reward_unavailable` | 422 | InvalidRequest | v1.11. The reward is off or outside its dates; the body's `reason` says which. | Refresh `rewards->list()`; stop offering it. |
+| `reward_limit_reached` | 422 | InvalidRequest | v1.11. The customer holds `per_customer_limit` of this reward already. | Offer another; reversing one frees a place. |
 | `currency_already_exists` | 409 | InvalidRequest | Already configured. | Use `currencies->update()`. |
 | `invalid_currency_code` | 422 | InvalidRequest | Not an ISO 4217 code. | Fix the code. |
 | `program_not_initialized` | 500 | Configuration | The account has no programme record. | Contact support. |

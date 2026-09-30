@@ -20,6 +20,7 @@ use Quoyer\QuoyerObject;
  * @property-read int $points_redeemed
  * @property-read string|null $monetary_value Two decimals, e.g. `"1.00"`.
  * @property-read string|null $currency
+ * @property-read QuoyerObject|null $reward v1.11: the catalogue reward as redeemed (`id`, `name`, `type`, `points_cost`, `amount`, `currency`, `percent`, `product_id`); null for points as money off.
  * @property-read string|null $coupon_code `QYR-XXXXXXXX`: a reference. Create the real coupon on your shop.
  * @property-read list<QuoyerObject> $bucket_consumption `bucket_id` and `amount` per drained bucket.
  * @property-read string|null $source_reference

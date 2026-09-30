@@ -53,6 +53,16 @@ Parameters are the API's own field names: see the
 | `mergeMetadata(id, metadata)` | `POST /redemptions/{id}/metadata` | `Redemption` | yes (idempotent) |
 | `findBySourceReference(ref)` | `GET /redemptions?source_reference=&type=all&limit=1` | `?Redemption` | yes |
 
+## `rewards` (API v1.11)
+
+| Method | Endpoint | Returns | Retried |
+|---|---|---|---|
+| `list(params)` | `GET /rewards` | `Collection<Reward>` (with a customer: `canRedeemFor()`) | yes |
+| `retrieve(id)` | `GET /rewards/{id}` | `Reward` | yes |
+| `redeem(id, params)` | `POST /rewards/{id}/redeem` | `Redemption` (`wasNew()`, `reward`, `coupon_code`) | yes (idempotent) |
+
+Undo a reward with `redemptions->reverse()`.
+
 ## `buckets`
 
 | Method | Endpoint | Returns |

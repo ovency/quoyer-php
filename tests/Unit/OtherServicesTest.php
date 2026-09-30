@@ -11,6 +11,8 @@ use Quoyer\Resources\EarningRule;
 use Quoyer\Resources\Me;
 use Quoyer\Resources\PointBucket;
 use Quoyer\Resources\Program;
+use Quoyer\Resources\Redemption;
+use Quoyer\Resources\Reward;
 use Quoyer\Resources\Tier;
 use Quoyer\Resources\TierList;
 use Quoyer\Tests\Support\Fixtures;
@@ -163,4 +165,40 @@ it('exposes services as methods too, for the facade', function () {
         ->and($client->currencies())->toBe($client->currencies)
         ->and($client->program())->toBe($client->program)
         ->and($client->tiers())->toBe($client->tiers);
+});
+
+it('lists rewards for a customer and redeems one as a redemption carrying the reward', function () {
+    $reward = [
+        'id' => 'rwd_1', 'object' => 'reward', 'name' => 'A free coffee', 'description' => null, 'type' => 'free_product',
+        'points_cost' => 120, 'amount' => null, 'amount_minor_units' => null, 'currency' => null, 'percent' => null, 'product_id' => '77',
+        'per_customer_limit' => 1, 'starts_at' => null, 'ends_at' => null, 'is_available' => true,
+        'customer' => ['can_redeem' => true, 'reason' => null, 'points_short' => 0, 'held' => 0],
+        'created_at' => '2026-09-30T10:00:00+00:00', 'updated_at' => '2026-09-30T10:00:00+00:00',
+    ];
+    $snapshot = ['id' => 'rwd_1', 'name' => 'A free coffee', 'type' => 'free_product', 'points_cost' => 120, 'amount' => null, 'currency' => null, 'percent' => null, 'product_id' => '77'];
+    $http = fakeHttp(
+        jsonResponse(200, Fixtures::list([$reward])),
+        jsonResponse(201, Fixtures::redemption(['reward' => $snapshot, 'points_redeemed' => 120, 'was_new' => true])),
+    );
+    $client = $http->client();
+
+    $list = $client->rewards->list(['customer_external_id' => '1042', 'customer_external_source' => 'woocommerce']);
+    $redemption = $client->rewards->redeem('rwd_1', ['customer_external_id' => '1042', 'customer_external_source' => 'woocommerce', 'source_reference' => 'cart_7_reward_1']);
+
+    expect($list->first())->toBeInstanceOf(Reward::class)
+        ->and($list->first()->canRedeemFor())->toBeTrue()
+        ->and($list->first()->type)->toBe(Reward::FREE_PRODUCT)
+        ->and($http->route(0))->toBe('GET /rewards')
+        ->and($http->route(1))->toBe('POST /rewards/rwd_1/redeem')
+        ->and($redemption)->toBeInstanceOf(Redemption::class)
+        ->and($redemption->wasNew())->toBeTrue()
+        ->and($redemption->reward->product_id)->toBe('77');
+});
+
+it('refuses a reward redemption without a source_reference before sending anything', function () {
+    $http = fakeHttp();
+
+    expect(fn () => $http->client()->rewards->redeem('rwd_1', ['customer_id' => 'cus_1']))
+        ->toThrow(InvalidArgumentException::class, 'source_reference')
+        ->and($http->sentCount())->toBe(0);
 });

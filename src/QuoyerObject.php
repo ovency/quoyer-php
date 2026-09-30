@@ -23,6 +23,7 @@ use Quoyer\Resources\PointTransaction;
 use Quoyer\Resources\Program;
 use Quoyer\Resources\Redemption;
 use Quoyer\Resources\Referral;
+use Quoyer\Resources\Reward;
 use Quoyer\Resources\Tier;
 
 /**
@@ -65,6 +66,7 @@ class QuoyerObject implements ArrayAccess, Countable, JsonSerializable
         'program' => Program::class,
         'redemption' => Redemption::class,
         'referral' => Referral::class,
+        'reward' => Reward::class,
         'tier' => Tier::class,
     ];
 

@@ -18,6 +18,7 @@ use Quoyer\Services\EarningRuleService;
 use Quoyer\Services\PointService;
 use Quoyer\Services\ProgramService;
 use Quoyer\Services\RedemptionService;
+use Quoyer\Services\RewardService;
 use Quoyer\Services\TierService;
 
 /**
@@ -41,16 +42,18 @@ use Quoyer\Services\TierService;
 final class QuoyerClient
 {
     /** This SDK's version. */
-    public const VERSION = '1.0.2';
+    public const VERSION = '1.1.0';
 
     /** The API contract version this SDK release covers in full. */
-    public const API_CONTRACT = '1.9';
+    public const API_CONTRACT = '1.11';
 
     public readonly CustomerService $customers;
 
     public readonly PointService $points;
 
     public readonly RedemptionService $redemptions;
+
+    public readonly RewardService $rewards;
 
     public readonly BucketService $buckets;
 
@@ -88,6 +91,7 @@ final class QuoyerClient
         $this->customers = new CustomerService($this->requestor);
         $this->points = new PointService($this->requestor);
         $this->redemptions = new RedemptionService($this->requestor);
+        $this->rewards = new RewardService($this->requestor);
         $this->buckets = new BucketService($this->requestor);
         $this->earningRules = new EarningRuleService($this->requestor);
         $this->catalogue = new CatalogueService($this->requestor);
@@ -175,6 +179,11 @@ final class QuoyerClient
     public function redemptions(): RedemptionService
     {
         return $this->redemptions;
+    }
+
+    public function rewards(): RewardService
+    {
+        return $this->rewards;
     }
 
     public function buckets(): BucketService

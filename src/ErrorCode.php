@@ -91,6 +91,11 @@ final class ErrorCode
 
     public const INVALID_REVERSE_REQUEST = 'invalid_reverse_request';
 
+    // Rewards (v1.11)
+    public const REWARD_UNAVAILABLE = 'reward_unavailable';
+
+    public const REWARD_LIMIT_REACHED = 'reward_limit_reached';
+
     // Currencies and programme
     public const CURRENCY_ALREADY_EXISTS = 'currency_already_exists';
 
