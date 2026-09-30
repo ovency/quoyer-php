@@ -14,6 +14,7 @@ use Quoyer\QuoyerObject;
  * @property-read string $name
  * @property-read int $threshold Qualifying points (earned in 365 days) to reach it. The lowest tier is 0.
  * @property-read int $multiplier Purchase earning in hundredths: 100 normal, 150 = 1.5×.
+ * @property-read int|null $purchase_discount_percent v1.13: percent off every purchase for this tier; apply it at checkout. Null: none.
  * @property-read string $badge_color
  * @property-read int $sort_order
  * @property-read string|null $created_at

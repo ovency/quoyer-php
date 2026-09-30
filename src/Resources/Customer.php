@@ -24,7 +24,7 @@ use Quoyer\QuoyerObject;
  * @property-read string|null $birthday `YYYY-MM-DD`.
  * @property-read QuoyerObject $balance `points` (int) and `value` (null, or `amount_minor_units`, `amount`, `currency`).
  * @property-read string|null $last_activity_at When the customer last earned or redeemed.
- * @property-read QuoyerObject|null $tier `id`, `name`, `badge_color`, `multiplier`, `since`. Null when VIP tiers are not active.
+ * @property-read QuoyerObject|null $tier `id`, `name`, `badge_color`, `multiplier`, `purchase_discount_percent` (v1.13), `since`. Null when VIP tiers are not active.
  * @property-read QuoyerObject|null $tier_progress `qualifying_points`, `next_tier`, `points_needed`. Null when VIP tiers are not active.
  * @property-read string|null $referral_code The member's own code to share. Null while referrals are off.
  * @property-read string|null $locale BCP-47, e.g. `ro`, `en-GB`.
