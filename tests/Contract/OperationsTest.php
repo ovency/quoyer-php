@@ -32,6 +32,7 @@ function operations(): array
         'listCustomerBuckets' => ['GET /customers/cus_1/buckets', fn (QuoyerClient $q) => $q->customers->buckets('cus_1')],
         'listBuckets' => ['GET /buckets', fn (QuoyerClient $q) => $q->buckets->list()],
         'getBucket' => ['GET /buckets/bkt_1', fn (QuoyerClient $q) => $q->buckets->retrieve('bkt_1')],
+        'awardCustomerEvent' => ['POST /customers/cus_1/events', fn (QuoyerClient $q) => $q->points->awardEvent('cus_1', ['event' => 'yoga_class', 'source_reference' => 'b'])],
         'creditPoints' => ['POST /points/credit', fn (QuoyerClient $q) => $q->points->credit(['customer_id' => 'cus_1', 'rule_type' => 'signup', 'source_reference' => 's'])],
         'reverseCredit' => ['POST /points/credit/reverse', fn (QuoyerClient $q) => $q->points->reverseCredit(['customer_id' => 'cus_1', 'source_reference' => 's'])],
         'listRedemptions' => ['GET /redemptions', fn (QuoyerClient $q) => $q->redemptions->list()],

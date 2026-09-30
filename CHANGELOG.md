@@ -6,10 +6,17 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [1.1.0] - 2026-09-30
 
-Covers Quoyer API contract **v1.13**.
+Covers Quoyer API contract **v1.14**.
 
 ### Added
 
+- `$quoyer->points->awardEvent($customerId, ['event' => …, 'source_reference' => …])`
+  (v1.14): pays the merchant's `custom` earning rule for an event it named.
+  `ErrorCode::UNKNOWN_EVENT`.
+- `RuleType::SocialFollow`, `RuleType::SocialShare`, `RuleType::Custom` and
+  `EarningRule::$social_network`, `$social_url`, `$event_key` (v1.14).
+- `award_welcome` in the `customers->upsert()` parameter shape (v1.14): pays the
+  sign-up rule once per customer.
 - `$quoyer->rewards`: `list()` (the catalogue, optionally for a customer),
   `retrieve()` and `redeem()` (a reward for a customer, answered as a
   `Redemption`). `Resources\Reward` with `canRedeemFor()`. Coupons (0-point

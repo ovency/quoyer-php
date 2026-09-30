@@ -42,6 +42,7 @@ New codes can appear: always keep a default branch.
 | `customer_not_found` | 404 | NotFound | No customer matches the identifiers. | Upsert the customer first. |
 | `bucket_not_found` | 404 | NotFound | Nothing was credited for that reference and rule type. | Nothing to reverse: treat as done. |
 | `location_not_found` | 422 | InvalidRequest | `location_id` names no active location. | Check the Locations page. |
+| `unknown_event` | 422 | InvalidRequest | v1.14. `points->awardEvent()`: no active custom earning rule has that event key. | Ask the merchant to create or switch on the rule. |
 | `email_conflict` | 422 | InvalidRequest | The email belongs to another customer. | Resolve the duplicate. |
 | `phone_conflict` | 422 | InvalidRequest | The phone belongs to another customer. | Resolve the duplicate. |
 | `external_id_conflict` | 422 | InvalidRequest | The external id pair belongs to another customer. | Resolve the duplicate. |

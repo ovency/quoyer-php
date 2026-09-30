@@ -40,6 +40,7 @@ Parameters are the API's own field names: see the
 | Method | Endpoint | Returns | Retried |
 |---|---|---|---|
 | `credit(params)` | `POST /points/credit` | `PointCreditResult` (`pointsAwarded()`, `wasNew()`) | yes (idempotent) |
+| `awardEvent(customerId, params)` | `POST /customers/{id}/events` (v1.14) | `PointCreditResult`; `unknown_event` when no custom rule has the key | yes (idempotent) |
 | `reverseCredit(params)` | `POST /points/credit/reverse` | `PointCreditReversalResult` (`wasNewlyReversed()`); a 409 "already reversed" is returned, not thrown | yes (idempotent) |
 
 ## `redemptions`

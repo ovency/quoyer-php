@@ -44,6 +44,23 @@ final class PointService extends AbstractService
     }
 
     /**
+     * Pay the merchant's `custom` earning rule for an event it named (v1.14):
+     * a class attended, a check-in, a survey answered. `event` is the rule's
+     * event key; `source_reference` makes it idempotent, like credit().
+     *
+     * An event key no active custom rule has throws InvalidRequestException
+     * `unknown_event`.
+     *
+     * @param  array{event: string, source_reference: string, metadata?: array<string, mixed>|null}  $params
+     */
+    public function awardEvent(string $customerId, array $params): PointCreditResult
+    {
+        self::requireKeys($params, 'points->awardEvent()', 'event', 'source_reference');
+
+        return $this->object(PointCreditResult::class, $this->requestor->request('POST', '/customers/'.self::segment($customerId, 'customer id').'/events', body: $params));
+    }
+
+    /**
      * Take back EVERY bucket a credit produced (a refund, a cancellation).
      * Identify the customer as for credit(); `rule_type` defaults to
      * `purchase`.

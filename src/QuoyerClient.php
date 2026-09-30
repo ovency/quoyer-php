@@ -45,7 +45,7 @@ final class QuoyerClient
     public const VERSION = '1.1.0';
 
     /** The API contract version this SDK release covers in full. */
-    public const API_CONTRACT = '1.13';
+    public const API_CONTRACT = '1.14';
 
     public readonly CustomerService $customers;
 

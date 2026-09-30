@@ -33,4 +33,13 @@ enum RuleType: string
 
     /** `fixed_points` for an approved product review. */
     case Review = 'review';
+
+    /** v1.14. Following on the rule's network, claimed by the customer in their account. Never credit it. */
+    case SocialFollow = 'social_follow';
+
+    /** v1.14. Sharing on the rule's network, claimed by the customer, at most once a day. Never credit it. */
+    case SocialShare = 'social_share';
+
+    /** v1.14. An event the merchant names (`event_key`): award it with `points->awardEvent()`. */
+    case Custom = 'custom';
 }

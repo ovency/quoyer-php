@@ -33,6 +33,9 @@ use Quoyer\QuoyerObject;
  * @property-read list<string>|null $target_product_ids
  * @property-read list<string>|null $target_category_ids
  * @property-read list<string>|null $target_brand_ids
+ * @property-read string|null $social_network v1.14. Social rules: instagram, facebook, tiktok, youtube, x, linkedin, pinterest or google.
+ * @property-read string|null $social_url v1.14. Social rules: the profile to follow or the page to share.
+ * @property-read string|null $event_key v1.14. Custom rules: the event key for `points->awardEvent()`.
  * @property-read string $created_at
  * @property-read string $updated_at
  */

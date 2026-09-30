@@ -68,6 +68,9 @@ final class ErrorCode
     // Earning
     public const LOCATION_NOT_FOUND = 'location_not_found';
 
+    /** v1.14. `points->awardEvent()`: no active custom rule has that event key. */
+    public const UNKNOWN_EVENT = 'unknown_event';
+
     public const RULE_REQUIRED = 'rule_required';
 
     public const RULE_NOT_FOUND = 'rule_not_found';

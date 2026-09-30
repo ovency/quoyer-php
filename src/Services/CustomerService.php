@@ -53,7 +53,14 @@ final class CustomerService extends AbstractService
      * `member_limit_reached` (the plan's cap refused a NEW member; existing
      * members are unaffected).
      *
-     * @param  array{external_id?: string|null, external_source?: string|null, email?: string|null, phone?: string|null, first_name?: string|null, last_name?: string|null, birthday?: string|null, referral_code?: string|null, locale?: string|null, email_opt_out?: bool|null}  $params
+     * `award_welcome: true` (v1.14) pays the merchant's sign-up rule: send it
+     * when the shopper registers, not for a guest. Once per customer, whichever
+     * path paid it first; the returned balance includes it.
+     *
+     * A merged customer's `cus_` id or external id reaches the customer it was
+     * merged into (v1.14): compare the returned id with the one you hold.
+     *
+     * @param  array{external_id?: string|null, external_source?: string|null, email?: string|null, phone?: string|null, first_name?: string|null, last_name?: string|null, birthday?: string|null, referral_code?: string|null, locale?: string|null, email_opt_out?: bool|null, award_welcome?: bool|null}  $params
      */
     public function upsert(array $params): Customer
     {
