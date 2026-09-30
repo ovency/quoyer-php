@@ -6,13 +6,15 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [1.1.0] - 2026-09-30
 
-Covers Quoyer API contract **v1.11**.
+Covers Quoyer API contract **v1.12**.
 
 ### Added
 
 - `$quoyer->rewards`: `list()` (the catalogue, optionally for a customer),
   `retrieve()` and `redeem()` (a reward for a customer, answered as a
-  `Redemption`). `Resources\Reward` with `canRedeemFor()`.
+  `Redemption`). `Resources\Reward` with `canRedeemFor()`. Coupons (0-point
+  rewards the merchant gives a customer) are listed for their holder, with
+  `customer.coupons`.
 - `Redemption::$reward`: the catalogue reward a redemption redeemed, or null.
 - `ErrorCode::REWARD_UNAVAILABLE`, `ErrorCode::REWARD_LIMIT_REACHED`.
 - v1.10's partial refund fields (`amount`, `points`, `refund_reference`) in the
