@@ -19,6 +19,7 @@ use Quoyer\Resources\Me;
 use Quoyer\Resources\PointBucket;
 use Quoyer\Resources\PointCreditResult;
 use Quoyer\Resources\PointCreditReversalResult;
+use Quoyer\Resources\PointsPreview;
 use Quoyer\Resources\PointTransaction;
 use Quoyer\Resources\Program;
 use Quoyer\Resources\Redemption;
@@ -62,6 +63,7 @@ class QuoyerObject implements ArrayAccess, Countable, JsonSerializable
         'point_bucket' => PointBucket::class,
         'point_credit_result' => PointCreditResult::class,
         'point_credit_reversal_result' => PointCreditReversalResult::class,
+        'points_preview' => PointsPreview::class,
         'point_transaction' => PointTransaction::class,
         'program' => Program::class,
         'redemption' => Redemption::class,

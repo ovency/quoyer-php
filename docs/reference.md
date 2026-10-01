@@ -41,6 +41,7 @@ Parameters are the API's own field names: see the
 |---|---|---|---|
 | `credit(params)` | `POST /points/credit` | `PointCreditResult` (`pointsAwarded()`, `wasNew()`) | yes (idempotent) |
 | `awardEvent(customerId, params)` | `POST /customers/{id}/events` (v1.14) | `PointCreditResult`; `unknown_event` when no custom rule has the key | yes (idempotent) |
+| `preview(params)` | `POST /points/preview` (v1.15) | `PointsPreview` (`points()`): what an order would earn, for "Earn 12 points" | yes |
 | `reverseCredit(params)` | `POST /points/credit/reverse` | `PointCreditReversalResult` (`wasNewlyReversed()`); a 409 "already reversed" is returned, not thrown | yes (idempotent) |
 
 ## `redemptions`

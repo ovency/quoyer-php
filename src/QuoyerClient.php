@@ -42,10 +42,10 @@ use Quoyer\Services\TierService;
 final class QuoyerClient
 {
     /** This SDK's version. */
-    public const VERSION = '1.1.0';
+    public const VERSION = '1.2.0';
 
     /** The API contract version this SDK release covers in full. */
-    public const API_CONTRACT = '1.14';
+    public const API_CONTRACT = '1.15';
 
     public readonly CustomerService $customers;
 

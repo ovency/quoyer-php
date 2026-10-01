@@ -7,6 +7,7 @@ namespace Quoyer\Services;
 use Quoyer\Enums\RuleType;
 use Quoyer\Resources\PointCreditResult;
 use Quoyer\Resources\PointCreditReversalResult;
+use Quoyer\Resources\PointsPreview;
 
 /**
  * Crediting points, and taking them back: `$quoyer->points`.
@@ -79,5 +80,24 @@ final class PointService extends AbstractService
             PointCreditReversalResult::class,
             $this->requestor->request('POST', '/points/credit/reverse', body: $params, acceptStatus: [409]),
         );
+    }
+
+    /**
+     * What an order would earn, for "Earn 12 points" on a product page or in
+     * the cart (v1.15). Runs the purchase rules exactly as credit() would and,
+     * when a customer is named, adds their tier's bonus. Writes nothing and
+     * needs no customer.
+     *
+     * Send the price times quantity as `amount` and a line item per product,
+     * so targeted rules price correctly. Cache the answer per product, price,
+     * currency and tier.
+     *
+     * @param  array{amount: float|int|string, currency?: string|null, line_items?: list<array<string, mixed>>, customer_id?: string|null, customer_external_id?: string|null, customer_external_source?: string|null, customer_card_number?: string|null, customer_phone?: string|null, location_id?: string|null}  $params
+     */
+    public function preview(array $params): PointsPreview
+    {
+        self::requireKeys($params, 'points->preview()', 'amount');
+
+        return $this->object(PointsPreview::class, $this->requestor->request('POST', '/points/preview', body: $params));
     }
 }

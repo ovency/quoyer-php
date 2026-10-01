@@ -35,6 +35,7 @@ function operations(): array
         'awardCustomerEvent' => ['POST /customers/cus_1/events', fn (QuoyerClient $q) => $q->points->awardEvent('cus_1', ['event' => 'yoga_class', 'source_reference' => 'b'])],
         'creditPoints' => ['POST /points/credit', fn (QuoyerClient $q) => $q->points->credit(['customer_id' => 'cus_1', 'rule_type' => 'signup', 'source_reference' => 's'])],
         'reverseCredit' => ['POST /points/credit/reverse', fn (QuoyerClient $q) => $q->points->reverseCredit(['customer_id' => 'cus_1', 'source_reference' => 's'])],
+        'previewPoints' => ['POST /points/preview', fn (QuoyerClient $q) => $q->points->preview(['amount' => 49.99])],
         'listRedemptions' => ['GET /redemptions', fn (QuoyerClient $q) => $q->redemptions->list()],
         'createRedemption' => ['POST /redemptions', fn (QuoyerClient $q) => $q->redemptions->create(['customer_id' => 'cus_1', 'points' => 100, 'source_reference' => 'r'])],
         'getRedemption' => ['GET /redemptions/red_1', fn (QuoyerClient $q) => $q->redemptions->retrieve('red_1')],

@@ -4,6 +4,15 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-10-01
+
+Covers Quoyer API contract **v1.15**.
+
+### Added
+
+- `$quoyer->points->preview([...])` (v1.15): what an order would earn, for "Earn 12 points"
+  on a product page or in the cart; adds the named customer's tier bonus. `ResourcesPointsPreview`.
+
 ## [1.1.0] - 2026-09-30
 
 Covers Quoyer API contract **v1.14**.

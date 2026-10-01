@@ -9,6 +9,7 @@ use Quoyer\Exceptions\NotFoundException;
 use Quoyer\Resources\PointBucket;
 use Quoyer\Resources\PointCreditResult;
 use Quoyer\Resources\PointCreditReversalResult;
+use Quoyer\Resources\PointsPreview;
 use Quoyer\Resources\Redemption;
 use Quoyer\Tests\Support\Fixtures;
 
@@ -137,4 +138,18 @@ it('finds a redemption by source reference across every type', function () {
 
     expect($redemption)->toBeInstanceOf(Redemption::class)
         ->and($http->query())->toBe(['source_reference' => 'woocommerce_cart_7_1', 'type' => 'all', 'limit' => '1']);
+});
+
+it('previews what an order would earn', function () {
+    $http = fakeHttp(jsonResponse(200, [
+        'object' => 'points_preview', 'points' => 74, 'base_points' => 49, 'tier_bonus_points' => 25, 'currency' => 'EUR',
+        'tier' => ['id' => 'tir_1', 'name' => 'Gold', 'multiplier' => 150, 'purchase_discount_percent' => 10], 'program_active' => true,
+    ]));
+    $preview = $http->client()->points->preview(['amount' => 49.99, 'customer_id' => 'cus_1']);
+
+    expect($http->route())->toBe('POST /points/preview')
+        ->and($preview)->toBeInstanceOf(PointsPreview::class)
+        ->and($preview->points())->toBe(74)
+        ->and($preview->tier->purchase_discount_percent)->toBe(10);
+    expect(fn () => $http->client()->points->preview([]))->toThrow(InvalidArgumentException::class, 'amount');
 });
