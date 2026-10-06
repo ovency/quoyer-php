@@ -4,6 +4,17 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-10-06
+
+Covers Quoyer API contract **v1.17**.
+
+### Added
+
+- `Reward::$summary` (v1.17): the reward in one sentence for a shopper, written by Quoyer
+  from the reward's own data ("Spend 500 points, get an extra 10 RON off.", "…get a free
+  cookie."). Pass `locale` to `rewards->list()` for the language; without it, the named
+  customer's, else English.
+
 ## [1.3.0] - 2026-10-06
 
 Covers Quoyer API contract **v1.16**.

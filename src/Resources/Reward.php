@@ -13,6 +13,7 @@ use Quoyer\QuoyerObject;
  * @property-read string $object `reward`
  * @property-read string $name Shopper-facing.
  * @property-read string|null $description Shopper-facing conditions.
+ * @property-read string $summary The reward in one sentence for a shopper, from its own data: "Spend 500 points, get an extra 10 RON off." In the language of the `locale` parameter, else the named customer's, else English (v1.17).
  * @property-read string $type `money_off`, `percent_off`, `free_product` or `free_shipping`.
  * @property-read int $points_cost 0 is a coupon (v1.12): given to customers, listed only for a holder, one redemption per coupon.
  * @property-read string|null $amount `money_off`: two decimals.
