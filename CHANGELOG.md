@@ -4,6 +4,19 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-10-06
+
+Covers Quoyer API contract **v1.16**.
+
+### Added
+
+- `PointTransaction::$label` and `PointBucket::$label` (v1.16): what the points were for,
+  in words a shopper reads ("Purchase", "Welcome bonus", "Goodwill gesture"), already in
+  their language. `earning_rule->label` is the rule itself in the same words. Show these in
+  an activity feed in place of the rule's internal `name`.
+- `locale` in the `customers->transactions()` parameter shape (v1.16): the language for
+  `label`. Without it, the customer's own language, else English.
+
 ## [1.2.0] - 2026-10-01
 
 Covers Quoyer API contract **v1.15**.

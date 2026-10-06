@@ -13,7 +13,8 @@ use Quoyer\QuoyerObject;
  * @property-read string $id `bkt_…`
  * @property-read string $object `point_bucket`
  * @property-read string|null $customer_id `cus_…`
- * @property-read QuoyerObject|null $earning_rule `id`, `type`, `name`.
+ * @property-read QuoyerObject|null $earning_rule `id`, `type`, `name` (internal) and `label` (the rule in a shopper's words, v1.16).
+ * @property-read string $label What these points were for, in a shopper's words and language (v1.16). Show this, not the rule's name.
  * @property-read int $original_amount
  * @property-read int $remaining_amount
  * @property-read int $consumed_amount 0 when the bucket was reversed.

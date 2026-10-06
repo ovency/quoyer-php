@@ -16,6 +16,7 @@ use Quoyer\QuoyerObject;
  * @property-read int $amount Always positive.
  * @property-read int $amount_signed Negative for debits.
  * @property-read string|null $description A label for staff. Do not parse it.
+ * @property-read string|null $label On an `earn`, what the points were for, in words a shopper reads ("Purchase", "Welcome bonus"), in the language of the `locale` parameter, else the customer's, else English (v1.16). Null for other kinds.
  * @property-read string|null $bucket_id `bkt_…` for earns, expiries and clawbacks.
  * @property-read string|null $redemption_record_id `red_…` for spends, deductions and refunds.
  * @property-read bool $is_reversed True on an `earn` whose credit was later clawed back.

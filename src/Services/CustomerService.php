@@ -111,9 +111,10 @@ final class CustomerService extends AbstractService
 
     /**
      * The customer's wallet ledger, oldest first: earns, spends, refunds,
-     * deductions, expiries and clawbacks.
+     * deductions, expiries and clawbacks. `locale` (v1.16) picks the language
+     * of each earn's `label`; without it, the customer's own, else English.
      *
-     * @param  array{limit?: int, cursor?: string}  $params
+     * @param  array{limit?: int, cursor?: string, locale?: string}  $params
      * @return Collection<PointTransaction>
      */
     public function transactions(string $id, array $params = []): Collection
