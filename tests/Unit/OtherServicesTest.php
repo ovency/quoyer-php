@@ -172,7 +172,7 @@ it('lists rewards for a customer and redeems one as a redemption carrying the re
         'id' => 'rwd_1', 'object' => 'reward', 'name' => 'A free coffee', 'description' => null, 'type' => 'free_product',
         'points_cost' => 120, 'amount' => null, 'amount_minor_units' => null, 'currency' => null, 'percent' => null, 'product_id' => '77',
         'per_customer_limit' => 1, 'starts_at' => null, 'ends_at' => null, 'is_available' => true,
-        'customer' => ['can_redeem' => true, 'reason' => null, 'points_short' => 0, 'held' => 0],
+        'customer' => ['can_redeem' => true, 'reason' => null, 'points_short' => 0, 'held' => 0, 'coupons' => 0, 'on_hold' => true],
         'created_at' => '2026-09-30T10:00:00+00:00', 'updated_at' => '2026-09-30T10:00:00+00:00',
     ];
     $snapshot = ['id' => 'rwd_1', 'name' => 'A free coffee', 'type' => 'free_product', 'points_cost' => 120, 'amount' => null, 'currency' => null, 'percent' => null, 'product_id' => '77'];
@@ -187,6 +187,7 @@ it('lists rewards for a customer and redeems one as a redemption carrying the re
 
     expect($list->first())->toBeInstanceOf(Reward::class)
         ->and($list->first()->canRedeemFor())->toBeTrue()
+        ->and($list->first()->isOnHoldFor())->toBeTrue()
         ->and($list->first()->type)->toBe(Reward::FREE_PRODUCT)
         ->and($http->route(0))->toBe('GET /rewards')
         ->and($http->route(1))->toBe('POST /rewards/rwd_1/redeem')

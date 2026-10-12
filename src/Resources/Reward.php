@@ -25,7 +25,7 @@ use Quoyer\QuoyerObject;
  * @property-read string|null $starts_at
  * @property-read string|null $ends_at
  * @property-read bool $is_available
- * @property-read QuoyerObject|null $customer With a customer: `can_redeem`, `reason` (incl. `not_issued` for a coupon they hold none of), `points_short`, `held`, `coupons` (v1.12).
+ * @property-read QuoyerObject|null $customer With a customer: `can_redeem`, `reason` (incl. `not_issued` for a coupon they hold none of), `points_short`, `held`, `coupons` (v1.12), `on_hold` (v1.18).
  * @property-read string $created_at
  * @property-read string $updated_at
  */
@@ -38,6 +38,18 @@ final class Reward extends QuoyerObject
     public const FREE_PRODUCT = 'free_product';
 
     public const FREE_SHIPPING = 'free_shipping';
+
+    /**
+     * Whether the customer the list was asked for has asked for this reward in the
+     * Quoyer app and has it kept aside (v1.18): show it first. False when the list was
+     * not asked for a customer, or from an older Quoyer.
+     */
+    public function isOnHoldFor(): bool
+    {
+        $customer = $this->raw['customer'] ?? null;
+
+        return is_array($customer) && ($customer['on_hold'] ?? false) === true;
+    }
 
     /**
      * Whether the customer the list was asked for can redeem it now. False

@@ -4,6 +4,16 @@ All notable changes to `quoyer/quoyer-php`. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project
 follows [Semantic Versioning](https://semver.org/).
 
+## [1.5.0] - 2026-10-12
+
+Covers Quoyer API contract **v1.18**.
+
+### Added
+
+- `Reward::isOnHoldFor()` and `customer->on_hold` (v1.18): the customer asked for this reward in
+  the Quoyer app and it is kept aside for them for 30 minutes. Show it first. Nothing is spent
+  until you redeem it (`rewards->redeem()`), which uses the hold up.
+
 ## [1.4.0] - 2026-10-06
 
 Covers Quoyer API contract **v1.17**.
